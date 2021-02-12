@@ -14,14 +14,6 @@ const App = () => (
             <p>Projects</p>
           </a>
           <a className="list-item" href="#">
-            <i className="item-icon icon-coin" />
-            <p>Invoices</p>
-          </a>
-          <a className="list-item" href="#">
-            <i className="item-icon icon-signing" />
-            <p>Proposals</p>
-          </a>
-          <a className="list-item" href="#">
             <i className="item-icon icon-user" />
             <p>People</p>
           </a>
