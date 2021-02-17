@@ -1,6 +1,7 @@
 import React from 'react';
 import MainMenu from './MainMenu'
 import AddForm from './AddForm'
+import Task from './Task'
 
 const App = () => (
   <>
@@ -150,6 +151,14 @@ const App = () => (
             <div className="group-head">
               <p>Completed</p>
             </div>
+            <Task 
+              title="Sama Task bi, thiakhagoune" 
+              isChecked 
+              hasDescription 
+              commentsCount={0} 
+              filesCount={0} 
+              iconTimer={0}
+            />
             <div className="group-content">
               <div className="task">
                 <a className="task-link" href="#">
