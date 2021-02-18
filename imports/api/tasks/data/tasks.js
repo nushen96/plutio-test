@@ -1,0 +1,57 @@
+export const tasks = [
+    {
+      title: "Task 1",
+      isChecked: false,
+      hasDescription: true,
+      commentsCount: 1,
+      filesCount: 0,
+      iconTimer: 0,
+      tags: [],
+      color: '#4e42c3'
+    },
+    {
+      title: "Task 2",
+      isChecked: false,
+      hasDescription: false,
+      commentsCount: 0,
+      filesCount: 0,
+      iconTimer: 0,
+      tags: ['Highest'],
+    },
+    {
+      title: "Task 3",
+      isChecked: false,
+      hasDescription: true,
+      commentsCount: 0,
+      filesCount: 1,
+      iconTimer: 0,
+      tags: []
+    },
+    {
+      title: "Task 4",
+      isChecked: false,
+      hasDescription: true,
+      commentsCount: 1,
+      filesCount: 0,
+      iconTimer: 1,
+      tags: [],
+    },
+    {
+      title: "Task 5",
+      isChecked: true,
+      hasDescription: false,
+      commentsCount: 0,
+      filesCount: 0,
+      iconTimer: 0,
+      tags: [],
+    },
+    {
+      title: "Task 6",
+      isChecked: true,
+      hasDescription: false,
+      commentsCount: 1,
+      filesCount: 0,
+      iconTimer: 0,
+      tags: [],
+    },
+  ]

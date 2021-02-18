@@ -1,21 +1,27 @@
-import React from 'react';
+import React from 'react'
 import Icon from './reusable/Icon'
-
-const Task = ({ title, isChecked, hasDescription, commentsCount, filesCount, iconTimer }) => {
+import Tag from './reusable/Tag'
+//Add tags
+const Task = ({ title, isChecked, hasDescription, commentsCount, filesCount, iconTimer, tags, color }) => {
     let displayedIcons = []
     hasDescription && displayedIcons.push("icon-description")
-    commentsCount>0 && displayedIcons.push("icon-chat")
-    filesCount>0 && displayedIcons.push("icon-attach")
-    iconTimer>0 && displayedIcons.push("icon-timer")
-    console.log(displayedIcons)
+    commentsCount > 0 && displayedIcons.push("icon-chat")
+    filesCount > 0 && displayedIcons.push("icon-attach")
+    iconTimer > 0 && displayedIcons.push("icon-timer")
+    
+    const colorStyle = color ? { borderColor: color } : null
     return (
         <div className="task">
-            <a className="task-link" href="#">
+            <a 
+                className={color ? "task-link has-color-tag" : "task-link"} 
+                href="#" 
+                style={colorStyle}
+            >
                 <div className="task-link-head">
                     <div className="task-checkbox">
                         <label className="checkbox">
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 checked={!!isChecked}
                                 onClick={() => console.log("Task checked!")}
                                 readOnly
@@ -30,9 +36,20 @@ const Task = ({ title, isChecked, hasDescription, commentsCount, filesCount, ico
                     </div>
                 </div>
                 <div className="task-link-body">
-                    <div className="indicators">
-                        {displayedIcons.map(iconName => (<Icon name={iconName} />))}
-                    </div>
+                    {
+                        displayedIcons.length > 0 && (
+                            <div className="indicators">
+                                {displayedIcons.map(iconName => (<Icon key={iconName} name={iconName} />))}
+                            </div>
+                        )
+                    }
+                    {
+                        tags.length > 0 && (
+                            <div className="custom-fields">
+                                {tags.map(tag => <Tag tagText={tag} />)}
+                            </div>
+                        )
+                    }
                 </div>
             </a>
         </div>

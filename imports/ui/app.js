@@ -2,6 +2,9 @@ import React from 'react';
 import MainMenu from './MainMenu'
 import AddForm from './AddForm'
 import Task from './Task'
+import { tasks } from '../api/tasks/data/tasks'
+const incompleteTasks = tasks.filter(task => !task.isChecked)
+const completeTasks = tasks.filter(task => task.isChecked)
 
 const App = () => (
   <>
@@ -23,187 +26,40 @@ const App = () => (
       </div>
       <div className="main-tasks-page content list-view">
         <AddForm />
-        <div className="groups-wrapper">
-          <div className="group-container open">
-            <div className="group-head">
-              <p>Incomplete</p>
+        {
+          tasks.length > 0 && (
+            <div className="groups-wrapper">
+              {
+                incompleteTasks.length > 0 && (
+                  <div className="group-container open">
+                    <div className="group-head">
+                      <p>Incomplete</p>
+                    </div>
+                    <div className="group-content">
+                      {incompleteTasks.map(task => (
+                        <Task {...task} />
+                      ))}
+                    </div>
+                  </div>
+                )
+              }
+              {
+                completeTasks.length > 0 && (
+                  <div className="group-container open">
+                    <div className="group-head">
+                      <p>Completed</p>
+                    </div>
+                    <div className="group-content">
+                      {completeTasks.map(task => (
+                        <Task {...task} />
+                      ))}
+                    </div>
+                  </div>
+                )
+              }
             </div>
-            <div className="group-content">
-              <div className="task">
-                <a
-                  className="task-link has-color-tag"
-                  href="#"
-                  style={{ borderColor: '#4e42c3' }}
-                >
-                  <div className="task-link-head">
-                    <div className="task-checkbox">
-                      <label className="checkbox">
-                        <input type="checkbox" />
-                        <span className="checkbox-toggle">
-                          <i className="checkbox-icon icon-check" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="task-title">
-                      <p>Task1</p>
-                    </div>
-                  </div>
-                  <div className="task-link-body">
-                    <div className="indicators">
-                      <span className="icon-indicator">
-                        <i className="icon-description" />
-                      </span>
-                      <span className="icon-indicator">
-                        <i className="icon-chat" />
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className="task">
-                <a className="task-link" href="#">
-                  <div className="task-link-head">
-                    <div className="task-checkbox">
-                      <label className="checkbox">
-                        <input type="checkbox" />
-                        <span className="checkbox-toggle">
-                          <i className="checkbox-icon icon-check" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="task-title">
-                      <p>Task2</p>
-                    </div>
-                  </div>
-                  <div className="task-link-body">
-                    <div className="custom-fields">
-                      <div className="custom-field custom-field-single">
-                        <p className="color-light has-color-tag">
-                          <span className="field-background" />
-                          <span className="field-title">Highest</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className="task">
-                <a className="task-link" href="#">
-                  <div className="task-link-head">
-                    <div className="task-checkbox">
-                      <label className="checkbox">
-                        <input type="checkbox" />
-                        <span className="checkbox-toggle">
-                          <i className="checkbox-icon icon-check" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="task-title">
-                      <p>Task3</p>
-                    </div>
-                  </div>
-                  <div className="task-link-body">
-                    <div className="indicators">
-                      <span className="icon-indicator">
-                        <i className="icon-description" />
-                      </span>
-
-                      <span className="icon-indicator">
-                        <i className="icon-attach" />
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className="task">
-                <a className="task-link" href="#">
-                  <div className="task-link-head">
-                    <div className="task-checkbox">
-                      <label className="checkbox">
-                        <input type="checkbox" />
-                        <span className="checkbox-toggle">
-                          <i className="checkbox-icon icon-check" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="task-title">
-                      <p>Task4</p>
-                    </div>
-                  </div>
-                  <div className="task-link-body">
-                    <div className="indicators">
-                      <span className="icon-indicator">
-                        <i className="icon-description" />
-                      </span>
-                      <span className="icon-indicator">
-                        <i className="icon-chat" />
-                      </span>
-                      <span className="icon-indicator">
-                        <i className="icon-timer" />
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="group-container open">
-            <div className="group-head">
-              <p>Completed</p>
-            </div>
-            <Task 
-              title="Sama Task bi, thiakhagoune" 
-              isChecked 
-              hasDescription 
-              commentsCount={0} 
-              filesCount={0} 
-              iconTimer={0}
-            />
-            <div className="group-content">
-              <div className="task">
-                <a className="task-link" href="#">
-                  <div className="task-link-head">
-                    <div className="task-checkbox">
-                      <label className="checkbox">
-                        <input type="checkbox" defaultChecked />
-                        <span className="checkbox-toggle">
-                          <i className="checkbox-icon icon-check" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="task-title">
-                      <p>Task5</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className="task">
-                <a className="task-link" href="#">
-                  <div className="task-link-head">
-                    <div className="task-checkbox">
-                      <label className="checkbox">
-                        <input type="checkbox" defaultChecked />
-                        <span className="checkbox-toggle">
-                          <i className="checkbox-icon icon-check" />
-                        </span>
-                      </label>
-                    </div>
-                    <div className="task-title">
-                      <p>Task6</p>
-                    </div>
-                  </div>
-                  <div className="task-link-body">
-                    <div className="indicators">
-                      <span className="icon-indicator">
-                        <i className="icon-chat" />
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+          )
+        }
       </div>
     </div>
   </>
