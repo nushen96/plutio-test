@@ -2,12 +2,14 @@ import React from 'react'
 import Icon from './reusable/Icon'
 import Tag from './reusable/Tag'
 //Add tags
-const Task = ({ title, isChecked, hasDescription, commentsCount, filesCount, iconTimer, tags, color }) => {
+const Task = ({ title, status, hasDescription, commentsCount, filesCount, iconTimer, customFields, color }) => {
     let displayedIcons = []
     hasDescription && displayedIcons.push("icon-description")
     commentsCount > 0 && displayedIcons.push("icon-chat")
     filesCount > 0 && displayedIcons.push("icon-attach")
     iconTimer > 0 && displayedIcons.push("icon-timer")
+    let tags = []
+    customFields.map(field => tags.push(field.value))
     
     const colorStyle = color ? { borderColor: color } : null
     return (
@@ -22,7 +24,7 @@ const Task = ({ title, isChecked, hasDescription, commentsCount, filesCount, ico
                         <label className="checkbox">
                             <input
                                 type="checkbox"
-                                checked={!!isChecked}
+                                checked={status==="completed"}
                                 onClick={() => console.log("Task checked!")}
                                 readOnly
                             />
