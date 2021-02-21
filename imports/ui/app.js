@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import MainMenu from './MainMenu'
 import AddForm from './AddForm'
 import Task from './Task'
-import { useTracker } from "meteor/react-meteor-data"
-import { Tasks } from '/imports/api/tasks'
+import {get} from "/imports/api/tasks/methods/get"
 
 const toggleCompletion = ({ _id, isChecked }) => {
   Tasks.update(_id, {
@@ -14,12 +13,9 @@ const toggleCompletion = ({ _id, isChecked }) => {
 }
 
 const App = () => {
-  const incompleteTasks = Tasks.find({}).fetch()
-    const completeTasks = []
-  /*
-    const completeTasks = useTracker(() =>
-    Tasks.find({ status: "completed" }, { sort: { title: 1 } }).fetch())*/
-  console.log(incompleteTasks)
+  const tasks = get()
+  const incompleteTasks = tasks.filter(task => task.status==="incomplete");
+  const completeTasks = tasks.filter(task => task.status==='completed');
   return (
     <>
       <MainMenu />
@@ -50,7 +46,7 @@ const App = () => {
                       </div>
                       <div className="group-content">
                         {incompleteTasks.map(task => (
-                          <Task {...task} />
+                          <Task key={task._id} {...task} />
                         ))}
                       </div>
                     </div>
@@ -64,7 +60,7 @@ const App = () => {
                       </div>
                       <div className="group-content">
                         {completeTasks.map(task => (
-                          <Task {...task} />
+                          <Task key={task._id} {...task} />
                         ))}
                       </div>
                     </div>

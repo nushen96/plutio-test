@@ -1,15 +1,24 @@
 import React from 'react'
 import Icon from './reusable/Icon'
 import Tag from './reusable/Tag'
-//Add tags
-const Task = ({ title, status, hasDescription, commentsCount, filesCount, iconTimer, customFields, color }) => {
+import {Tasks} from '/imports/api/tasks'
+
+const toggleCompletion = (_id,status) => {
+    Tasks.update(_id, {
+      $set: {
+        status: status === "completed" ? "incomplete" : "completed"
+      }
+    })
+  }
+
+const Task = ({ _id, title, status, hasDescription, commentsCount, filesCount, iconTimer, customFields, color }) => {
     let displayedIcons = []
     hasDescription && displayedIcons.push("icon-description")
     commentsCount > 0 && displayedIcons.push("icon-chat")
     filesCount > 0 && displayedIcons.push("icon-attach")
     iconTimer > 0 && displayedIcons.push("icon-timer")
     let tags = []
-    customFields.map(field => tags.push(field.value))
+    customFields.map(field => tags.push(field))
     
     const colorStyle = color ? { borderColor: color } : null
     return (
@@ -25,7 +34,7 @@ const Task = ({ title, status, hasDescription, commentsCount, filesCount, iconTi
                             <input
                                 type="checkbox"
                                 checked={status==="completed"}
-                                onClick={() => console.log("Task checked!")}
+                                onClick={() => toggleCompletion(_id,status)}
                                 readOnly
                             />
                             <span className="checkbox-toggle">
@@ -48,7 +57,7 @@ const Task = ({ title, status, hasDescription, commentsCount, filesCount, iconTi
                     {
                         tags.length > 0 && (
                             <div className="custom-fields">
-                                {tags.map(tag => <Tag tagText={tag} />)}
+                                {tags.map(({_id, value}) => <Tag key={_id} tagText={value} />)}
                             </div>
                         )
                     }

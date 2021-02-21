@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Tag = ({ tagText }) => {
+const Tag = ({tagText}) => {
     return (
         <div className="custom-field custom-field-single">
             <p className="color-light has-color-tag">

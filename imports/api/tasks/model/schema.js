@@ -2,7 +2,14 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 export const Tasks = new Mongo.Collection('tasks');
-
+Tasks.allow({
+  'insert': function(userId, doc) {
+    return true;
+  },
+  'update': function(userId, doc) {
+    return true;
+  },
+})
 const regExId = SimpleSchema.RegEx.Id;
 
 const { Integer } = SimpleSchema;
